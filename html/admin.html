@@ -1,0 +1,119 @@
+<div class="row col-xs-12">
+
+    <h1>ADMIN PANEL</h1>
+
+    <div class="panel panel-default">
+
+        <div id="newUserModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div ng-bind="ctrl.result"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="ctrl.clear">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-heading">
+            Create new user
+        </div>
+
+        <div id="edit-menu">
+            <form align="left"  ng-submit="ctrl.createNewAccount()">
+                <div>
+                    <label for="login">Login</label>
+                    <input id="login" class="form-control" type="text" ng-model="ctrl.newLogin" required="" placeholder="login" autofocus=""/>
+                </div>
+                <div>
+                    <label for="password">Password</label>
+                    <input id="password" class="form-control" type="password" ng-model="ctrl.newPassword" placeholder="password" required="">
+                </div>
+                <div>
+                    <label for="startBalance">Start balance</label>
+                    <input id="startBalance" class="form-control" type="number" ng-model="ctrl.startBalance" placeholder="start balance" required=""/>
+                </div>
+                <div>
+                    <label for="accountLimit">Limit</label>
+                    <input id="accountLimit" class="form-control" type="number" ng-model="ctrl.newLimit" placeholder="limit" required="">
+                </div>
+                <div>
+                    <label for="role">Role</label>
+                    <select id="role" class="form-control" ng-model="ctrl.newRole">
+                        <option value=''>--Please select option--</option>
+                        <option value="user"> User </option>
+                        <option value="admin"> Admin </option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary" ng-disabled="!ctrl.newPassword || !ctrl.newLogin || !ctrl.newRole">Create Account</button>
+            </form>
+        </div>
+
+
+        <div id="editUserPopup" class="modal" tabindex="-2" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div>
+                        <h4><div ng-bind="ctrl.edit_newLogin"></div></h4>
+                    </div>
+
+                <form align="left"  ng-submit="ctrl.editAccount()">
+
+                    <div>
+                        <label for="edit_password">Password</label>
+                        <input id="edit_password" class="form-control" type="password" ng-model="ctrl.edit_newPassword" placeholder="password" required="">
+                    </div>
+                    <div>
+                        <label for="edit_balance">Start balance</label>
+                        <input id="edit_balance" class="form-control" type="number" ng-model="ctrl.edit_startBalance" placeholder="start balance" required=""/>
+                    </div>
+                    <div>
+                        <label for="edit_limit">Limit</label>
+                        <input id="edit_limit" class="form-control" type="number" ng-model="ctrl.edit_newLimit" placeholder="limit" required="">
+                    </div>
+                    <div>
+                        <label for="edit_role">Role</label>
+                        <select id="edit_role" class="form-control" ng-model="ctrl.edit_newRole">
+                            <option value=''>--Please select option--</option>
+                            <option value="user"> User </option>
+                            <option value="admin"> Admin </option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" ng-disabled="!ctrl.edit_newPassword || !ctrl.edit_newLogin || !ctrl.edit_newRole">Edit Account</button>
+                </form>
+            </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+            <table class="table table-stripped table-hover">
+                <tr>
+                    <th>Id</th><th>login</th><th>Role</th><th>Limit</th><th>Edit</th>
+                </tr>
+                <tr ng-repeat="user in ctrl.allUsers">
+                    <td ng-bind="user._id"></td>
+                    <td ng-bind="user.login"></td>
+                    <td ng-bind="user.role" align="left"></td>
+                    <td ng-bind="user.limit" align="right"></td>
+                    <td align="right">
+                        <button class="btn btn-primary" ng-click="ctrl.setEditedUser(user._id)"></button>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</div>

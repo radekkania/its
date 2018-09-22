@@ -1,0 +1,50 @@
+<div class="row col-xs-12">
+
+			<h1>Transfer</h1>
+
+			<div class="panel panel-default">
+			
+				<div class="panel-heading">
+					Transfer parameters
+				</div>
+			
+				<div class="panel-body">
+
+					<table class="table table-stripped">
+						<tr ng-class="ctrl.balance > 0 ? 'info' : 'warning'">
+							<td align="left">Balance</td><td ng-bind="ctrl.balance" align="right"></td>
+						</tr>
+						<tr>
+							<td>Maximum payoff</td><td ng-bind="ctrl.balance - ctrl.limit" align="right"></td>
+						</tr>
+					</table>
+
+				</div>
+
+				<div class="panel-footer text-center">
+
+					<form align="center" class="form-inline" ng-submit="ctrl.transfer()">
+						<div>
+							<label for="recipient">Recipient</label>
+							<input id="recipient" class="form-control" type="text" ng-model="ctrl.recipient" required="" autofocus=""/>
+							<select ng-model="ctrl.recipient" class="form-control" ng-options="rec for rec in ctrl.recipients">
+							</select>
+						</div>
+						<div>
+							<label for="title">Title</label>
+							<input id="title" class="form-control" type="text" ng-model="ctrl.title">
+						</div>
+						<div>
+							<label for="amount">Amount</label>
+							<input id="amount" class="form-control" type="number" ng-model="ctrl.amount" placeholder="amount" required=""/>
+						</div>
+						<button type="submit" class="btn btn-primary" ng-disabled="!ctrl.recipient || ctrl.amount <= 0 || ctrl.amount > ctrl.balance - ctrl.limit || !ctrl.title">Transfer</button>
+					</form>
+
+				</div>
+
+
+			</div>
+</div>
+			
+
